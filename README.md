@@ -9,9 +9,9 @@
 
 * Membros do Grupo:
 
-	. Estefani Goulão Famorosa	Nº: 20240217
-	. Jorge Veloso			Nº: 20241500
-	. Josemar Chipandeca		Nº: 20242447
+		Estefani Famorosa			Nº: 20240217
+		Jorge Veloso				Nº: 20241500
+		Josemar Chipandeca			Nº: 20242447
 
 # Objetivo Geral do Projecto
 
