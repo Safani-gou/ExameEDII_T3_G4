@@ -1,2 +1,30 @@
-# ExameEDII_T3_G4
-This repository is part of our final project for the Data Structures II course, which has the following theme: Hydraulic Connection. The main structure used is Grafus.
+# Ligação Hidráulica (Ligações de Redes de Água)
+
+		Grupo:			4
+		Disciplina:		Estrutura de Dados II
+		Categoria:		Exame Final da Disciplina
+		Linguagem:		C
+		Ano:			2025 - 2026
+		Repositório GitHub:
+
+* Membros do Grupo:
+
+	. Estefani Goulão Famorosa	Nº: 20240217
+	. Jorge Veloso			Nº: 20241500
+	. Josemar Chipandeca		Nº: 20242447
+
+# Objetivo Geral do Projecto
+
+# Objectivo do Projecto
+
+# Modo de Funcionamento
+
+# Menu Principal
+
+# Funções Principais
+
+# Tipos de Dados Definido
+
+# Integração de Ficheiros
+
+# Estrutura do Projecto
