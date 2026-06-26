@@ -1,0 +1,21 @@
+# Sistema de Gestao de Rede Hidraulica
+# Formato: PONTO id nome tipo
+# Formato: LIGACAO orig dest custo distancia
+
+PONTO 1 Reservatorio_Central Reservatorio
+PONTO 2 Escola_Primaria Escola
+PONTO 3 Hospital_Geral Hospital
+PONTO 4 Casa_Bairro_A Casa
+PONTO 5 Casa_Bairro_B Casa
+PONTO 6 Escola_Secundaria Escola
+PONTO 7 Hospital_Pediatrico Hospital
+PONTO 8 Casa_Bairro_C Casa
+LIGACAO 1 2 1500.00 300.00
+LIGACAO 1 3 2200.00 450.00
+LIGACAO 1 4 800.00 150.00
+LIGACAO 2 5 600.00 120.00
+LIGACAO 3 6 900.00 200.00
+LIGACAO 4 7 1100.00 250.00
+LIGACAO 5 8 700.00 130.00
+LIGACAO 6 8 400.00 80.00
+LIGACAO 7 8 1300.00 280.00
