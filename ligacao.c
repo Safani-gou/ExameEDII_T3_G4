@@ -1,8 +1,19 @@
+/*
+ * ligacao.c - Implementacao do TAD Ligacao
+ *
+ * Uma ligacao representa uma tubagem entre dois pontos
+ * da rede hidraulica, com custo e distancia associados.
+ *
+ * Grupo: ExameEDII_T3_G4 | ISPTC 2025/2
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "ligacao.h"
 
-/* Cria uma nova ligacao alocada na heap */
+/*
+ * criarLigacao - aloca e inicializa uma nova Ligacao na heap.
+ */
 Ligacao* criarLigacao(int origem, int destino, float custo, float distancia) {
     Ligacao* l = (Ligacao*)malloc(sizeof(Ligacao));
     if (!l) {
@@ -18,19 +29,29 @@ Ligacao* criarLigacao(int origem, int destino, float custo, float distancia) {
     return l;
 }
 
-/* Imprime os dados de uma ligacao */
+/*
+ * imprimirLigacao - exibe os dados de uma ligacao no ecra.
+ */
 void imprimirLigacao(const Ligacao* l) {
-    if (!l) { printf("[ERRO] Ligacao invalida.\n"); return; }
+    if (!l) {
+        printf("[ERRO] Ligacao invalida.\n");
+        return;
+    }
     printf("  %d -> %d | Custo: %.2f Kz | Distancia: %.2f m\n",
            l->origem, l->destino, l->custo, l->distancia);
 }
 
-/* Libera memoria */
+/*
+ * destruirLigacao - liberta a memoria de uma Ligacao.
+ */
 void destruirLigacao(Ligacao* l) {
     if (l) free(l);
 }
 
-/* Comparadores para ordenacao */
+/*
+ * compararPorCusto - comparador para ordenacao por custo crescente.
+ * Usado pelos algoritmos de ordenacao e por qsort().
+ */
 int compararPorCusto(const void* a, const void* b) {
     const Ligacao* la = (const Ligacao*)a;
     const Ligacao* lb = (const Ligacao*)b;
@@ -39,6 +60,9 @@ int compararPorCusto(const void* a, const void* b) {
     return 0;
 }
 
+/*
+ * compararPorDistancia - comparador para ordenacao por distancia crescente.
+ */
 int compararPorDistancia(const void* a, const void* b) {
     const Ligacao* la = (const Ligacao*)a;
     const Ligacao* lb = (const Ligacao*)b;

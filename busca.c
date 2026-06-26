@@ -1,8 +1,25 @@
+/*
+ * busca.c - Implementacao dos Algoritmos de Busca
+ *
+ * Implementa 5 algoritmos de pesquisa sobre os pontos da rede:
+ *   1. Busca Linear   - O(n), sem requisitos de ordenacao
+ *   2. Busca Binaria  - O(log n), requer array ordenado por ID
+ *   3. Busca em AVL   - O(log n), aproveita a arvore balanceada
+ *   4. Busca em Hash  - O(1) medio, acesso directo por ID
+ *   5. Busca por Nome - O(n), comparacao de strings
+ *
+ * Grupo: ExameEDII_T3_G4 | ISPTC 2025/2
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include "busca.h"
 
-/* ---- Busca Linear por ID ---- */
+/*
+ * buscaLinear - percorre o array sequencialmente ate encontrar o ID.
+ * Complexidade: O(n) - verifica cada elemento um por um.
+ * Vantagem: funciona em qualquer array, sem ordenacao previa.
+ */
 Ponto* buscaLinear(Ponto** arr, int n, int id) {
     int i;
     for (i = 0; i < n; i++)
@@ -14,16 +31,21 @@ Ponto* buscaLinear(Ponto** arr, int n, int id) {
     return NULL;
 }
 
-/* ---- Busca Binaria por ID (array ordenado) ---- */
+/*
+ * buscaBinaria - divide o espaco de busca a cada iteracao.
+ * Complexidade: O(log n) - muito mais rapida que a linear.
+ * Pre-requisito: array DEVE estar ordenado por ID.
+ */
 Ponto* buscaBinaria(Ponto** arr, int n, int id) {
     int esq = 0, dir = n - 1;
     while (esq <= dir) {
-        int mid = esq + (dir - esq) / 2;
+        int mid = esq + (dir - esq) / 2; /* evita overflow de inteiros */
         if (!arr[mid]) { esq++; continue; }
         if (arr[mid]->id == id) {
             printf("[SUCESSO] Busca binaria: ponto ID %d encontrado.\n", id);
             return arr[mid];
         }
+        /* descarta a metade errada */
         if (arr[mid]->id < id) esq = mid + 1;
         else                   dir = mid - 1;
     }
@@ -31,7 +53,10 @@ Ponto* buscaBinaria(Ponto** arr, int n, int id) {
     return NULL;
 }
 
-/* ---- Busca por Nome (linear) ---- */
+/*
+ * buscaPorNome - busca linear usando strcmp para comparar nomes.
+ * Complexidade: O(n) - verifica cada elemento.
+ */
 Ponto* buscaPorNome(Ponto** arr, int n, const char* nome) {
     int i;
     for (i = 0; i < n; i++)
@@ -43,7 +68,10 @@ Ponto* buscaPorNome(Ponto** arr, int n, const char* nome) {
     return NULL;
 }
 
-/* ---- Busca em AVL ---- */
+/*
+ * buscaEmAVL - aproveita a estrutura balanceada da AVL.
+ * Complexidade: O(log n) garantido em todos os casos.
+ */
 Ponto* buscaEmAVL(AVL* avl, int id) {
     if (!avl) return NULL;
     NoAVL* no = buscarAVL(avl->raiz, id);
@@ -55,12 +83,19 @@ Ponto* buscaEmAVL(AVL* avl, int id) {
     return NULL;
 }
 
-/* ---- Busca em Hash ---- */
+/*
+ * buscaEmHash - acesso directo pelo slot hash do ID.
+ * Complexidade: O(1) medio - o mais rapido na pratica.
+ */
 Ponto* buscaEmHash(HashTable* ht, int id) {
-    return buscarHash(ht, id);
+    return buscarHash(ht, id); /* delegado ao modulo hash.c */
 }
 
-/* ---- Ordenar array de ponteiros por ID (selection sort simples) ---- */
+/*
+ * ordenarPontosPorID - ordena um array de ponteiros por ID crescente.
+ * Necessario antes de usar buscaBinaria().
+ * Algoritmo: Selection Sort (simples e suficiente para este uso).
+ */
 void ordenarPontosPorID(Ponto** arr, int n) {
     int i, j, minIdx;
     for (i = 0; i < n - 1; i++) {
@@ -68,6 +103,10 @@ void ordenarPontosPorID(Ponto** arr, int n) {
         for (j = i + 1; j < n; j++)
             if (arr[j] && arr[minIdx] && arr[j]->id < arr[minIdx]->id)
                 minIdx = j;
-        if (minIdx != i) { Ponto* t = arr[i]; arr[i] = arr[minIdx]; arr[minIdx] = t; }
+        if (minIdx != i) {
+            Ponto* t    = arr[i];
+            arr[i]      = arr[minIdx];
+            arr[minIdx] = t;
+        }
     }
 }

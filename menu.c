@@ -101,10 +101,30 @@ void menuPontos(Sistema* s) {
             pausar();
         } else if (opcao == 2) {
             int id = lerInteiro("  ID a remover: ", 1, 9999);
-            removerPontoGrafo(s->grafo, id);
+            /*
+             * GESTAO DE MEMORIA SEGURA:
+             * O Ponto e partilhado pelo grafo, BST, AVL e Hash.
+             * Ordem correcta:
+             *   1. Guardar o ponteiro antes de remover
+             *   2. Remover de todas as estruturas (sem free)
+             *   3. Chamar free() UMA unica vez no final
+             * Assim evitamos ponteiros invalidos (dangling pointers).
+             */
+            /* passo 1: guardar ponteiro antes de qualquer remocao */
+            int idx = buscarIndicePonto(s->grafo, id);
+            Ponto* pRemover = (idx >= 0) ? s->grafo->pontos[idx] : NULL;
+
+            /* passo 2: remover de todas as estruturas (sem libertar memoria) */
+            removerPontoGrafo(s->grafo, id);   /* NAO chama free() */
             s->bst->raiz = removerBST(s->bst->raiz, id);
             s->avl->raiz = removerAVL(s->avl->raiz, id);
             removerHash(s->hash, id);
+
+            /* passo 3: libertar a memoria uma unica vez */
+            if (pRemover) {
+                free(pRemover);
+                printf("[SUCESSO] Memoria do ponto ID %d libertada.\n", id);
+            }
             pausar();
         } else if (opcao == 3) {
             limparEcra();

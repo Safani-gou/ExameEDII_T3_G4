@@ -2,20 +2,25 @@
 #define BUSCA_H
 
 #include "ponto.h"
-#include "ligacao.h"
 #include "avl.h"
 #include "hash.h"
 
-/* Busca em arrays de pontos */
+/*
+ * Modulo de algoritmos de busca.
+ * Permite pesquisar pontos da rede por ID ou por nome,
+ * usando diferentes estruturas e algoritmos.
+ */
+
+/* Busca em array de ponteiros de Pontos */
 Ponto* buscaLinear (Ponto** arr, int n, int id);
-Ponto* buscaBinaria(Ponto** arr, int n, int id);  /* arr deve estar ordenado por ID */
+Ponto* buscaBinaria(Ponto** arr, int n, int id); /* array deve estar ordenado por ID */
 Ponto* buscaPorNome(Ponto** arr, int n, const char* nome);
 
-/* Busca nas estruturas */
+/* Busca nas estruturas de dados */
 Ponto* buscaEmAVL  (AVL* avl, int id);
 Ponto* buscaEmHash (HashTable* ht, int id);
 
-/* Ordenar array de ponteiros por ID (para busca binaria) */
+/* Ordena array de ponteiros por ID (necessario para busca binaria) */
 void ordenarPontosPorID(Ponto** arr, int n);
 
-#endif
+#endif /* BUSCA_H */
