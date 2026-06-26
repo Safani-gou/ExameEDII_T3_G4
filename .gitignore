@@ -1,0 +1,8 @@
+# Compilados
+rede
+rede.exe
+*.o
+*.out
+
+# Outros
+.vscode/
